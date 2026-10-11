@@ -921,6 +921,14 @@ target_link_libraries(diagnostic_capture_tests PRIVATE gbarecomp_gba)
 add_test(NAME diagnostic_capture_tests_disabled COMMAND diagnostic_capture_tests --disabled)
 add_test(NAME diagnostic_capture_tests_enabled COMMAND diagnostic_capture_tests --enabled)
 
+# Host-stack budget guard — pure pthread/stack logic, links only
+# src/runtime/mobile_platform.cpp.
+add_executable(stack_guard_tests
+    tests/runtime/stack_guard_test.cpp
+    src/runtime/mobile_platform.cpp)
+target_include_directories(stack_guard_tests PRIVATE src/runtime)
+add_test(NAME stack_guard_tests COMMAND stack_guard_tests)
+
 # Self-heal proposal clustering — pure logic, links only the standalone
 # clustering TU (no runtime/bus/overlay dependencies).
 add_executable(selfheal_cluster_test
