@@ -921,6 +921,14 @@ target_link_libraries(diagnostic_capture_tests PRIVATE gbarecomp_gba)
 add_test(NAME diagnostic_capture_tests_disabled COMMAND diagnostic_capture_tests --disabled)
 add_test(NAME diagnostic_capture_tests_enabled COMMAND diagnostic_capture_tests --enabled)
 
+# FramePacer banked-frame throttling — wall-clock pacing, links only
+# src/runtime/host_platform.cpp.
+add_executable(pacer_tests
+    tests/runtime/pacer_test.cpp
+    src/runtime/host_platform.cpp)
+target_include_directories(pacer_tests PRIVATE src/runtime)
+add_test(NAME pacer_tests COMMAND pacer_tests)
+
 # Self-heal proposal clustering — pure logic, links only the standalone
 # clustering TU (no runtime/bus/overlay dependencies).
 add_executable(selfheal_cluster_test
